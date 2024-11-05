@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(CURL REQUIRED)
 
-add_executable(cpp_20 solution_workshop_3_s_1.cpp)
+add_executable(cpp_20    solution_work_shop_s_2.cpp)
 target_link_libraries(cpp_20 PRIVATE CURL::libcurl)
