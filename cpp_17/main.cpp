@@ -39,10 +39,9 @@ void withVariant(std::variant<int, double, std::string> element) {
     // Access and print the value inside the variant using std::visit
     std::visit([](auto&& arg) {
         std::cout << "Variant contains (via std::visit): " << arg << '\n';
-
         // Type checking using traits
-        if constexpr (std::is_same_v<decltype(arg), int>) {
-            std::cout << "The type of the variant value is int.\n";
+        if constexpr (std::is_same<decltype(arg), int>().value) {
+            std::cout << arg << "The type of the variant value is int.\n";
         } else if constexpr (std::is_same_v<decltype(arg), double>) {
             std::cout << "The type of the variant value is double.\n";
         } else if constexpr (std::is_same_v<decltype(arg), std::string>) {
@@ -149,7 +148,7 @@ int main() {
     // Demo 3: std::variant with additional functions
     std::variant<int, double, std::string> element = "C++17 is cool!";
     withVariant(element);
-
+    withVariant(std::string("test"));
     // Demo 4: Fold expression
     std::cout << "Sum: " << sum(1, 2, 3, 4, 5) << '\n';
 
