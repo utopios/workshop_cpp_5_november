@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <ranges>
-
+import Module1;
 //1. concepts
 template <typename T>
 concept Integral = std::is_integral_v<T>;
@@ -37,7 +37,7 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     auto result = add(10, 30);
     std::cout << result << '\n';
-
+    Module1:add(10,30);
     //2. spaceship operator
     Point p1{x:20, y:10};
     Point p2{x:20, y:30};

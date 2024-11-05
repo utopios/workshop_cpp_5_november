@@ -18,16 +18,16 @@ struct Point {
         self.y = dy;
     }
 
-    const Point& reflect() const {
+    /*const Point& reflect() const {
         return *this;
     };
 
     Point& reflect() {
         x = -x; y = -y;
         return *this;
-    }
+    }*/
 
-    /*auto reflect(this auto& self) {
+    auto reflect(this auto& self) {
         if constexpr (std::is_const_v< std::remove_reference_t<decltype(self)>>) {
             std::cout << "reflect const\n";
         }
@@ -36,7 +36,7 @@ struct Point {
             self.x = -self.x; self.y = -self.y;
         }
         return self;
-    }*/
+    }
     void display(this const Point& self) {
         std::cout << "Point(" << self.x << ", " << self.y << ")\n";
     }
