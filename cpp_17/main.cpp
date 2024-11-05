@@ -104,7 +104,7 @@ void demoAny() {
 }
 
 // 9. Parallel algorithms (C++17)
-/*void parallelAlgorithmsDemo() {
+void parallelAlgorithmsDemo() {
     const size_t dataSize = 1'000'000;  // One million elements
     std::vector<int> data(dataSize);
 
@@ -131,11 +131,11 @@ void demoAny() {
     end = std::chrono::high_resolution_clock::now();
     auto parUnseqDuration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
     std::cout << "Parallel unsequenced sum: " << parUnseqSum << " (Time: " << parUnseqDuration << " ms)" << std::endl;
-}*/
+}
 
 int main() {
 
-    std::cout << global_var << '\n';
+    /*std::cout << global_var << '\n';
 
     // Demo 1: if constexpr
     checkValue<5>();  // N = 5, so the second branch runs
@@ -159,10 +159,10 @@ int main() {
     checkFileSystem();
 
     // Demo 7: std::any
-    demoAny();
+    demoAny();*/
 
     // Demo 8: Parallel algorithms
-    //parallelAlgorithmsDemo();
+    parallelAlgorithmsDemo();
 
 
 
