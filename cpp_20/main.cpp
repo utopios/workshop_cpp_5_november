@@ -5,7 +5,6 @@
 #include <vector>
 #include <ranges>
 
-import firstmodule;
 //1. concepts
 template <typename T>
 concept Integral = std::is_integral_v<T>;
@@ -19,7 +18,13 @@ T add(T a, T b) {
 //2. spaceship operator
 struct Point {
     int x, y;
-    auto operator<=>(const Point&) const = default;
+    auto operator<=>(const Point& point) const  {
+        if(point.x < x) {
+            return std::partial_ordering::greater;
+        }else {
+            return std::partial_ordering::less;
+        }
+    };
 };
 
 
@@ -34,10 +39,10 @@ int main() {
     std::cout << result << '\n';
 
     //2. spaceship operator
-    Point p1{x:20, y:30};
+    Point p1{x:20, y:10};
     Point p2{x:20, y:30};
 
-    std::cout << (p1 == p2) << '\n';
+    std::cout << (p1 > p2) << '\n';
 
     constexpr int value = square(30);
     std::cout << value << '\n';
