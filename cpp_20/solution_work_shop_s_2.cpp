@@ -7,16 +7,19 @@
 // Awaitable pour simuler un délai asynchrone
 struct Awaitable {
     int delay;
+    std::string result;
     Awaitable(int d) : delay(d) {}
 
     bool await_ready() const noexcept { return false; }
     void await_suspend(std::coroutine_handle<> handle) const {
-        std::thread([handle, delay = this->delay]() {
+        std::thread([result = this->result, delay = this->delay]() {
             std::this_thread::sleep_for(std::chrono::seconds(delay));
             //handle.resume();
         }).detach();
     }
-    void await_resume() const noexcept {}
+    std::string await_resume() const noexcept {
+        return this->result;
+    }
 };
 
 // Generator pour récupérer des données en utilisant `co_yield`
@@ -59,8 +62,8 @@ struct DataGenerator {
 // Fonction `fetch_data_chunks` pour renvoyer les données en morceaux progressifs
 DataGenerator fetch_data_chunks(const std::string& source) {
     for (int i = 1; i <= 3; ++i) {
-        co_await Awaitable{1};
-        co_yield "Chunk " + std::to_string(i) + " from " + source;
+        std::string  result = co_await Awaitable{1};
+        co_yield "Chunk " + result + " from " + source;
     }
 }
 
