@@ -22,3 +22,46 @@ auto makeRand()
         v.push_back(rand());
     return v;
 }
+
+void exercise1()
+{
+    const auto v = std::vector<int>(100000000, 1);
+    {
+        const auto tic = now();
+        for_each(std::execution::seq, v.begin(), v.end(), [](int x){ return x++; });
+        const auto toc = now();
+        std::cout << ms(toc - tic) << "\n";
+    }
+    {
+        const auto tic = now();
+        for_each(std::execution::par, v.begin(), v.end(), [](int x){ return x++; });
+        const auto toc = now();
+        std::cout << ms(toc - tic) << "\n";
+    }
+}
+
+void exercise2()
+{
+    const auto c = makeRand();
+
+    {
+        auto v = c;
+        const auto tic = now();
+        std::sort(std::execution::seq, v.begin(), v.end());
+        const auto toc = now();
+        std::cout << ms(toc - tic) << "\n";
+    }
+    {
+        auto v = c;
+        const auto tic = now();
+        std::sort(std::execution::par, v.begin(), v.end());
+        const auto toc = now();
+        std::cout << ms(toc - tic) << "\n";
+    }
+}
+
+
+int main() {
+    exercise2();
+    return 0;
+}
